@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'widgets/purse_view.dart';
+import 'widgets/journal_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,17 +16,25 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _indexBottomNav = 1;
 
+  static const List<Widget> _views = <Widget>[
+    PurseView(),
+    JournalView(),
+    Text('Inventory View', style: TextStyle(fontSize: 50))
+  ];
+
+  static const List<Widget> _drawerOptions = <Widget>[
+    Text('Map'),
+    Text('Settings')
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            drawer: const Drawer(),
+            drawer: Drawer(child: ListView(children: _drawerOptions)),
             appBar: AppBar(title: const Text('Day manager')),
-            body: Container(
-                color: Colors.white,
-                child: const Center(
-                    child:
-                        Text('Day Manager', style: TextStyle(fontSize: 50)))),
+            body:
+                Container(color: Colors.white, child: _views[_indexBottomNav]),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: _indexBottomNav,
               onTap: (index) {
