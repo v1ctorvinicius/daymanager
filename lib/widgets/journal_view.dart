@@ -1,3 +1,4 @@
+import 'package:daymanager/widgets/components/checkbox_component.dart';
 import 'package:flutter/material.dart';
 
 class JournalView extends StatefulWidget {
@@ -8,10 +9,10 @@ class JournalView extends StatefulWidget {
 }
 
 class _MyAppState extends State<JournalView> {
-  final TextEditingController _addTaskDescriptionController =
-      TextEditingController();
+  final TextEditingController _addTaskDescriptionController = TextEditingController();
 
   List<Widget> _tasks = [];
+  
   List<bool> _tasksValues = [];
 
   @override
@@ -38,15 +39,10 @@ class _MyAppState extends State<JournalView> {
                 onPressed: () {
                   setState(() {
                     _tasksValues.add(false);
-                    _tasks.add(CheckboxListTile(
-                        value: false,
-                        title: Text(_addTaskDescriptionController.text),
-                        activeColor: Colors.green,
-                        onChanged: (value) {
-                          setState(() {
-                            _tasksValues[_tasksValues.length - 1] = value!;
-                          });
-                        }));
+                    _tasks.add(CheckboxComponent(
+                      title: _addTaskDescriptionController.text,
+                      value: false,
+                    ));
                   });
                 })
           ],
