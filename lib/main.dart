@@ -30,9 +30,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.yellow),
         home: Scaffold(
+            backgroundColor: Colors.yellow,
             drawer: Drawer(child: ListView(children: _drawerOptions)),
-            appBar: AppBar(title: const Text('Day manager')),
+            appBar: AppBar(
+              title: const Text('Day manager'),
+              elevation: 0,
+            ),
             body:
                 Container(color: Colors.white, child: _views[_indexBottomNav]),
             bottomNavigationBar: BottomNavigationBar(
