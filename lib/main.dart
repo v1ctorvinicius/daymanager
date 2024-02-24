@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'widgets/purse_view.dart';
 import 'widgets/journal_view.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  var box = await Hive.openBox('daymanager');
   runApp(const MyApp());
 }
 
@@ -14,15 +17,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _indexBottomNav = 1;
+  int indexBottomNav = 1;
 
-  static const List<Widget> _views = <Widget>[
+  static const List<Widget> views = <Widget>[
     PurseView(),
     JournalView(),
     Text('Inventory View', style: TextStyle(fontSize: 50))
   ];
 
-  static const List<Widget> _drawerOptions = <Widget>[
+  static const List<Widget> drawerOptions = <Widget>[
     Text('Map'),
     Text('Settings')
   ];
@@ -33,18 +36,18 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(primarySwatch: Colors.yellow),
         home: Scaffold(
             backgroundColor: Colors.yellow,
-            drawer: Drawer(child: ListView(children: _drawerOptions)),
+            drawer: Drawer(child: ListView(children: drawerOptions)),
             appBar: AppBar(
               title: const Text('Day manager'),
               elevation: 0,
             ),
             body:
-                Container(color: Colors.white, child: _views[_indexBottomNav]),
+                Container(color: Colors.white, child: views[indexBottomNav]),
             bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _indexBottomNav,
+              currentIndex: indexBottomNav,
               onTap: (index) {
                 setState(() {
-                  _indexBottomNav = index;
+                  indexBottomNav = index;
                 });
               },
               items: const [
