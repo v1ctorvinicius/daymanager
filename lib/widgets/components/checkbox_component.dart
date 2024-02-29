@@ -38,7 +38,7 @@ class _MyAppState extends State<CheckboxComponent> {
 
                 // fillColor: MaterialStateProperty.all(Colors.black),
                 value: widget.value,
-                title: Text(widget.title, style: _getTitleStyle()),
+                title: Text(widget.title, style: changeTitleStyle()),
                 activeColor: Colors.green,
                 onChanged: (value) {
                   setState(() {
@@ -51,7 +51,7 @@ class _MyAppState extends State<CheckboxComponent> {
     );
   }
 
-  TextStyle _getTitleStyle() {
+  TextStyle changeTitleStyle() {
     return TextStyle(
         fontSize: 20,
         decoration:
